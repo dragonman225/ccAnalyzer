@@ -1,0 +1,3 @@
+Please Do Not Move fetch.sh and raw/ folder!
+They are used by crontab task!
+If a move is needed, remember to edit crontab with crontab -e and fetch.sh.
