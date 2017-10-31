@@ -99,7 +99,7 @@ var chartOptions = {
                 id: 'rank_%',
                 position: 'left',
                 ticks: {
-                    max: 100,
+                    max: <%= render_worst_rank_percent %>,
                     min: 0,
                     beginAtZero: true,
                     reverse: true
@@ -109,7 +109,7 @@ var chartOptions = {
                 id: 'price_usd',
                 position: 'right',
                 ticks: {
-                    max: 6000,
+                    max: <%= render_max_price_usd %>,
                     min: 0,
                     beginAtZero: true,
                     reverse: false

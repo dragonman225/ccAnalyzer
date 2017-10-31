@@ -8,9 +8,11 @@ app.set('view engine', 'ejs');
 app.get('/:coinname', (req, res) => {
   let coinInfo = coinSearch.search(req.params.coinname);
   console.log(coinInfo);
-  if (typeof coinInfo[0].info !== 'undefined') {
+  if (typeof coinInfo.history[0].info !== 'undefined') {
     res.render('backbone', {
-      coinData: coinInfo
+      coinData: coinInfo.history,
+      render_max_price_usd: coinInfo.max_price_usd * 1.1,
+      render_worst_rank_percent: coinInfo.worst_rank_percent * 1.1
     });
   } else {
     // console.log("This is fxcking nodejs error! App is Actually fine.");
