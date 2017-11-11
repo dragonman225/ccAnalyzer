@@ -1,1 +1,2 @@
 # ccAnalyzer
+A CryptoCoin Analyzer
