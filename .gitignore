@@ -4,4 +4,4 @@
 /app/assets/*
 !/raw/.gitkeep
 !/app/assets/.gitkeep
-/node_modules/*
+/app/node_modules/*
