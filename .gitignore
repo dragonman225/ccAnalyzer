@@ -2,3 +2,6 @@
 
 /raw/*
 /app/assets/*
+!/raw/.gitkeep
+!/app/assets/.gitkeep
+/node_modules/*
