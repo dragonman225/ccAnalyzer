@@ -10,14 +10,16 @@ const CoinSearch = {
     db.forEach((snapshot) => {
       let tmpInfo = snapshot.rankList.find(coin => coin.id === coinId);
       let coinCount = snapshot.rankList.length;
-      result.history.push({
-        date: snapshot.date,
-        info: tmpInfo,
-        coinCount,
-      });
-      if (parseFloat(tmpInfo.price_usd) > result.max_price_usd) result.max_price_usd = parseFloat(tmpInfo.price_usd);
-      let newWorstRankPercent = parseFloat(tmpInfo.rank) / coinCount * 100;
-      if (newWorstRankPercent > result.worst_rank_percent) result.worst_rank_percent = newWorstRankPercent;
+      if (typeof tmpInfo !== "undefined") {
+        result.history.push({
+          date: snapshot.date,
+          info: tmpInfo,
+          coinCount,
+        });
+        if (parseFloat(tmpInfo.price_usd) > result.max_price_usd) result.max_price_usd = parseFloat(tmpInfo.price_usd);
+        let newWorstRankPercent = parseFloat(tmpInfo.rank) / coinCount * 100;
+        if (newWorstRankPercent > result.worst_rank_percent) result.worst_rank_percent = newWorstRankPercent;
+      }
     });
     return result;
   }

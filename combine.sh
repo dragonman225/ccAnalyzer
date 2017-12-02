@@ -8,7 +8,7 @@ fi
 echo "[" >> app/assets/txtdb.json
 
 # Create new txtdb
-for i in raw/*; do
+for i in raw/rawData*; do
 	echo "Appending $(echo $i | cut -d \/ -f 2) to app/assets/txtdb.json"
 	echo "{" >> app/assets/txtdb.json
 	printf "\"date\": \"$(echo $i | cut -d \_ -f 2 | cut -d \+ -f 1)\",\n" >> app/assets/txtdb.json
