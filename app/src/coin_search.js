@@ -22,6 +22,56 @@ const CoinSearch = {
       }
     });
     return result;
+  },
+
+  getSMA: (coinId, frameLength = 1) => {
+    let result = {
+      dataSets: [],
+      frameLength,
+    }
+    let history = CoinSearch.search(coinId).history;
+    let frameStartIndex = 0, frameEndIndex = frameLength - 1;
+    let tmpSum = 0;
+
+    // Init frist mean
+    for (let i = 0; i < frameLength; ++i) {
+      tmpSum += parseFloat(history[i].info.price_usd);
+    }
+    result.dataSets.push({
+      sma_price_usd: tmpSum / frameLength
+    });
+
+    // Calculate by moving the frame
+    while (frameEndIndex < history.length - 1) {
+      tmpSum -= parseFloat(history[frameStartIndex].info.price_usd);
+      frameStartIndex += 1;
+      frameEndIndex += 1;
+      tmpSum += parseFloat(history[frameEndIndex].info.price_usd);
+      result.dataSets.push({
+        sma_price_usd: tmpSum / frameLength
+      });
+    }
+    // old method, may be wrong
+    /*
+    for (let i = history.length; i > 0; i -= sampleCount) {
+      if (i >= sampleCount) {
+        let tmpSum = 0;
+        for (let j = 0; j < sampleCount; ++j) {
+            tmpSum += parseFloat(history[i-1-j].info.price_usd);
+        }
+        result.dataSets.push({
+          time_frame_start: history[i-sampleCount].date,
+          time_frame_end: history[i-1].date,
+          mean_price_usd: tmpSum / sampleCount
+        });
+      }
+      else {
+        result.abandonedCount = i;
+        break;
+      }
+    }
+    */
+    return result;
   }
 }
 
